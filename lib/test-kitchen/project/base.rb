@@ -127,7 +127,7 @@ module TestKitchen
       end
 
       def update_code_command
-        "rsync -aHv --update --progress --checksum --exclude '{vendor,test/kitchen/.kitchen}' #{guest_source_root}/ #{guest_test_root}"
+        "echo -e \"vendor\ntest/kitchen/.kitchen\" > /tmp/tk_rsync_exclude && rsync -aHv --update --progress --checksum --exclude-from /tmp/tk_rsync_exclude #{guest_source_root}/ #{guest_test_root}"
       end
 
       def preflight_command
