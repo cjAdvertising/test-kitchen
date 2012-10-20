@@ -23,8 +23,8 @@ module TestKitchen
       def install_command(runtime=nil, test_path=guest_test_root)
         cmd = "cd #{test_path}"
         cmd << " && rvm use #{runtime}" if runtime && ! runtime.empty?
-        cmd << " && gem install bundler"
-        cmd << " && #{install}"
+        cmd << " && sudo gem install bundler"
+        cmd << " && sudo #{install}"
       end
 
       def test_command(runtime=nil, test_path=guest_test_root)
