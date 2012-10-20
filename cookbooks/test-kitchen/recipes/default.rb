@@ -39,7 +39,7 @@ package "rsync" do
 end
 
 execute "stage project source to test root" do
-  command "rsync -aHv --update --progress --checksum #{source_root}/ #{test_root} "
+  command "rsync -aHv --update --progress --checksum --exclude vendor #{source_root}/ #{test_root} "
 end
 
 # make the project_root available to other recipes

@@ -33,7 +33,7 @@ module TestKitchen
 
       def source_paths_excluding_test_dir(cookbook_path)
         paths_from = Find.find(cookbook_path).reject do |path|
-          Find.prune if ['.git', 'test'].map do |dir|
+          Find.prune if ['.git', 'test', '.bundle', 'vendor'].map do |dir|
             File.join(cookbook_path, dir)
           end.include?(path)
         end.drop(1)
