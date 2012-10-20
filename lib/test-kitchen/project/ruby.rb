@@ -21,16 +21,16 @@ module TestKitchen
     class Ruby < Base
 
       def install_command(runtime=nil, test_path=guest_test_root)
-        cmd = "cd #{test_path}"
+        cmd = "sudo su -lc 'cd #{test_path}"
         cmd << " && rvm use #{runtime}" if runtime && ! runtime.empty?
-        cmd << " && sudo gem install bundler"
-        cmd << " && sudo #{install}"
+        cmd << " && gem install bundler"
+        cmd << " && #{install}' vagrant"
       end
 
       def test_command(runtime=nil, test_path=guest_test_root)
-        cmd = "cd #{test_path}"
+        cmd = "sudo su -lc 'cd #{test_path}"
         cmd << " && rvm use #{runtime}" if runtime && ! runtime.empty?
-        cmd << " && #{script}"
+        cmd << " && #{script}' vagrant"
       end
     end
   end
