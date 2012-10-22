@@ -50,7 +50,7 @@ module TestKitchen
       def execute_remote_command(vm, command, message=nil)
         vm = vagrant_env.vms[vm.to_sym] unless vm.kind_of?(::Vagrant::VM)
         vm.ui.info(message, :color => :yellow) if message
-        vm.channel.execute(command, :error_check => false) do |type, data|
+        vm.channel.execute(wrap_remote_command(command), :error_check => false) do |type, data|
           next if data =~ /stdin: is not a tty/
           if [:stderr, :stdout].include?(type)
             # Output the data with the proper color based on the stream.
@@ -61,6 +61,13 @@ module TestKitchen
       end
 
       private
+
+      def wrap_remote_command(command)
+        %{sudo su -lc "$(cat <<'__tk_vagrant_cmd'
+#{command}
+__tk_vagrant_cmd
+)" vagrant}
+      end
 
       def vagrant_env
         @vagrant_env ||= begin
