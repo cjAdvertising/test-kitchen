@@ -5,7 +5,6 @@
 *.html
 *.swp
 coverage
-Gemfile.lock
 pkg
 tests/
 tmp
