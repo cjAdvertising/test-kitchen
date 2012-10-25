@@ -26,6 +26,7 @@ module TestKitchen
       attr_writer :lint
       attr_writer :supported_platforms
       attr_writer :data_bags_path
+      attr_writer :roles_path
 
       def lint(arg=nil)
         set_or_return(:lint, arg, {:default => true})
@@ -50,6 +51,11 @@ module TestKitchen
       def data_bags_path(path = nil)
         set_or_return(:data_bags_path, path,
           { :default => root_path.join('test/kitchen/data_bags').to_s })
+      end
+
+      def roles_path(path = nil)
+        set_or_return(:roles_path, path,
+          { :default => root_path.join('test/kitchen/roles').to_s })
       end
 
       def script(arg=nil)
