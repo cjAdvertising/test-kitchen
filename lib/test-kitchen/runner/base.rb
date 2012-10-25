@@ -101,6 +101,9 @@ module TestKitchen
       protected
 
       def assemble_cookbooks!
+        env.project.clean_cookbook_under_test(env.tmp_path)
+        env.project.copy_cookbook_under_test(env.root_path, env.tmp_path)
+        
         # dump out a meta Cheffile
         env.create_tmp_file('Cheffile',
             IO.read(TestKitchen.source_root.join('config', 'Cheffile')))

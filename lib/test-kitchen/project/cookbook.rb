@@ -88,8 +88,8 @@ module TestKitchen
         end
       end
 
-      def cookbook_path(root_path, tmp_path)
-        @cookbook_path ||= copy_cookbook_under_test(root_path, tmp_path)
+      def cookbook_path(tmp_path)
+        @cookbook_path ||= copied_cookbook_path(tmp_path)
       end
 
     end
